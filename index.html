@@ -3,181 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Pengumuman Kelulusan</title>
+    <title>Pengumuman Kelulusan SMAS YPPK Teruna Bakti</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Montserrat:wght@400;500;600;700&family=Nunito:wght@700&family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Roboto+Slab:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
         :root {
-            /* Variabel Font */
             --font-body: 'Poppins', sans-serif;
             --font-heading: 'Playfair Display', serif;
-
-            /* Warna UI Depan */
             --bg-body: #f8fafc;
             --box-blue-dark: #1e3a8a;
             --box-blue-light: #2563eb;
             --accent-gold: #fbbf24;
             --text-dark: #1e293b;
-            --text-gray: #64748b;
             --white: #ffffff;
             --success: #10b981;
             --danger: #ef4444;
-            
-            /* Warna UI Admin */
-            --admin-bg: #0f172a;
-            --admin-box: #1e293b;
-            --admin-border: #334155;
-            --admin-text: #f8fafc;
-            --admin-text-muted: #94a3b8;
         }
 
-        body {
-            font-family: var(--font-body);
-            margin: 0;
-            background: var(--bg-body);
-            color: var(--text-dark);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            overflow-x: hidden;
-            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
-            background-size: 20px 20px;
-            transition: font-family 0.3s;
-            padding-bottom: 40px; /* Space untuk footer */
-            box-sizing: border-box;
+        body { 
+            font-family: var(--font-body); 
+            margin: 0; 
+            background: var(--bg-body); 
+            color: var(--text-dark); 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px); 
+            background-size: 20px 20px; 
+            padding-bottom: 50px; 
+            box-sizing: border-box; 
         }
-
-        /* Heading & Timer Text */
-        h1, h2, .timer-val {
-            font-family: var(--font-heading);
-        }
-
-        /* Header Section */
-        .header-section {
-            text-align: center;
-            margin-bottom: 30px;
-            animation: fadeInDown 0.8s ease-out;
-            padding: 0 15px;
-        }
-
-        #display-logo { width: 100px; height: 100px; object-fit: contain; margin-bottom: 15px; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1)); }
         
-        #display-school-name {
-            font-size: 32px; color: var(--box-blue-dark); margin: 0; letter-spacing: 1px; font-weight: 700;
+        h1, h2 { font-family: var(--font-heading); }
+        
+        .header-section { text-align: center; margin-bottom: 30px; animation: fadeInDown 0.8s ease-out; padding: 0 15px; }
+        
+        /* Pengaturan Logo */
+        #display-logo { margin-bottom: 15px; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1)); border-radius: 10px;}
+        
+        #display-school-name { font-size: 32px; color: var(--box-blue-dark); margin: 0; letter-spacing: 1px; font-weight: 700; }
+        .sub-header { font-size: 16px; color: #64748b; font-weight: 500; margin-top: 5px; }
+
+        .card { 
+            background: linear-gradient(135deg, var(--box-blue-dark) 0%, var(--box-blue-light) 100%); 
+            color: var(--white); 
+            padding: 40px; 
+            border-radius: 20px; 
+            width: 90%; 
+            max-width: 500px; 
+            text-align: center; 
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2); 
+            animation: scaleIn 0.6s ease-out; 
+            position: relative; 
+            overflow: hidden; 
         }
 
-        .sub-header { font-size: 16px; color: var(--text-gray); font-weight: 500; margin-top: 5px; }
-
-        /* Main Card - Kotak Biru */
-        .card {
-            background: linear-gradient(135deg, var(--box-blue-dark) 0%, var(--box-blue-light) 100%);
-            color: var(--white); padding: 40px; border-radius: 20px; width: 90%; max-width: 500px;
-            text-align: center; box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2); animation: scaleIn 0.6s ease-out;
-            position: relative; overflow: hidden;
-        }
-
-        .card::before { content: ''; position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: rgba(255,255,255,0.1); border-radius: 50%; }
-        .card::after { content: ''; position: absolute; bottom: -50px; left: -50px; width: 100px; height: 100px; background: rgba(255,255,255,0.05); border-radius: 50%; }
-
-        /* Countdown */
-        .timer-container { display: flex; justify-content: center; gap: 12px; margin: 25px 0; position: relative; z-index: 2; }
-        .timer-box { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(5px); padding: 15px 10px; border-radius: 12px; min-width: 65px; border: 1px solid rgba(255, 255, 255, 0.2); }
-        .timer-val { font-size: 28px; color: var(--white); display: block; font-weight: 700; line-height: 1; }
-        .timer-label { font-size: 11px; text-transform: uppercase; color: #e2e8f0; font-weight: 600; margin-top: 5px; display: block; }
-
-        /* Input & Button */
         .input-group { margin-bottom: 20px; position: relative; z-index: 2; }
-        input[type="text"] {
-            width: 100%; padding: 16px; border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 12px;
-            font-size: 16px; text-align: center; transition: 0.3s; background: rgba(255, 255, 255, 0.95);
-            color: var(--text-dark); font-family: inherit; box-sizing: border-box;
+        input[type="text"] { 
+            width: 100%; padding: 16px; border: 2px solid rgba(255, 255, 255, 0.2); 
+            border-radius: 12px; font-size: 16px; text-align: center; transition: 0.3s; 
+            background: rgba(255, 255, 255, 0.95); color: var(--text-dark); font-family: inherit; box-sizing: border-box; 
         }
         input[type="text"]:focus { border-color: var(--accent-gold); outline: none; background: #ffffff; box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.3); }
 
-        .btn-check {
-            background: var(--accent-gold); color: var(--box-blue-dark); width: 100%; padding: 16px;
-            border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer;
-            transition: 0.3s; position: relative; z-index: 2; font-family: var(--font-body);
+        .btn-check { 
+            background: var(--accent-gold); color: var(--box-blue-dark); width: 100%; 
+            padding: 16px; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; 
+            cursor: pointer; transition: 0.3s; position: relative; z-index: 2; font-family: var(--font-body); 
         }
         .btn-check:hover { background: #f59e0b; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); }
         .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255, 255, 255, 0.4); margin-top: 15px; }
         .btn-outline:hover { background: rgba(255, 255, 255, 0.1); }
 
-        /* Result */
-        .result-frame {
-            background: rgba(255, 255, 255, 0.1); border: 1px dashed rgba(255, 255, 255, 0.4);
-            border-radius: 16px; padding: 30px 20px; margin-top: 20px; position: relative; z-index: 2;
-        }
-        .status-badge {
-            display: inline-block; margin: 15px 0; padding: 8px 30px; font-size: 20px;
-            font-weight: 700; color: white; border-radius: 50px; letter-spacing: 1px; font-family: var(--font-body);
-        }
+        .result-frame { background: rgba(255, 255, 255, 0.1); border: 1px dashed rgba(255, 255, 255, 0.4); border-radius: 16px; padding: 30px 20px; margin-top: 20px; position: relative; z-index: 2; }
+        .status-badge { display: inline-block; margin: 15px 0; padding: 8px 30px; font-size: 20px; font-weight: 700; color: white; border-radius: 50px; letter-spacing: 1px; font-family: var(--font-body); }
         .status-lulus { background: var(--success); box-shadow: 0 8px 15px rgba(16, 185, 129, 0.4); }
         .status-gagal { background: var(--danger); box-shadow: 0 8px 15px rgba(239, 68, 68, 0.4); }
 
-        /* Admin Settings Icon */
-        .admin-toggle {
-            position: fixed; bottom: 25px; right: 25px; width: 50px; height: 50px;
-            background: var(--box-blue-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            color: var(--white); cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s; z-index: 100;
-        }
-        .admin-toggle:hover { background: var(--box-blue-light); transform: rotate(90deg); }
+        .footer-credit { position: fixed; bottom: 20px; width: 100%; text-align: center; font-size: 14px; color: #64748b; font-weight: 600; letter-spacing: 1px; z-index: 10; font-family: var(--font-body); }
 
-        /* Panel Admin Khusus (Dark Theme Dashboard) */
-        #admin-panel {
-            background: var(--admin-bg); color: var(--admin-text); box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            border: 1px solid var(--admin-border); text-align: left;
-        }
-        #admin-panel h2 { color: #38bdf8; border-bottom: 2px solid var(--admin-border); padding-bottom: 10px; margin-top: 0; font-family: var(--font-body); }
-        #admin-panel p { color: var(--admin-text-muted); font-size: 13px; font-weight: 600; margin-bottom: 8px; }
-        
-        #admin-panel input[type="text"], 
-        #admin-panel input[type="datetime-local"],
-        #admin-panel select {
-            border: 1px solid var(--admin-border); background: var(--admin-box); color: var(--admin-text);
-            margin-bottom: 20px; width: 100%; padding: 15px; border-radius: 12px; box-sizing: border-box;
-            font-family: inherit; font-size: 15px; outline: none; transition: 0.3s;
-        }
-        #admin-panel input[type="text"]:focus, 
-        #admin-panel input[type="datetime-local"]:focus,
-        #admin-panel select:focus {
-            border-color: #38bdf8; box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2); background: var(--admin-bg);
-        }
-        
-        .upload-box {
-            border: 2px dashed var(--admin-border); background: var(--admin-box);
-            padding: 20px; text-align: center; border-radius: 12px; margin-bottom: 20px; transition: 0.3s;
-        }
-        .upload-box:hover { border-color: #38bdf8; background: rgba(56, 189, 248, 0.05); }
-        .upload-box label { cursor: pointer; color: #38bdf8; display: block; font-size: 14px; font-weight: 500; }
-        .upload-box i { margin-bottom: 10px; color: var(--admin-text-muted); }
-
-        #admin-panel .btn-check { background: #38bdf8; color: var(--admin-bg); }
-        #admin-panel .btn-check:hover { background: #7dd3fc; }
-        #admin-panel .btn-outline { color: var(--admin-text-muted); border-color: var(--admin-border); }
-        #admin-panel .btn-outline:hover { background: var(--admin-box); color: var(--white); }
-
-        /* Footer Credit MNF & VM */
-        .footer-credit {
-            position: fixed;
-            bottom: 15px;
-            width: 100%;
-            text-align: center;
-            font-size: 13px;
-            color: var(--text-gray);
-            font-weight: 500;
-            letter-spacing: 1.5px;
-            z-index: 10;
-        }
-
-        #search-area, #result-area, #admin-panel { display: none; }
-
+        #result-area { display: none; }
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
     </style>
@@ -185,24 +95,13 @@
 <body>
 
     <div class="header-section" id="head-ui">
-        <img id="display-logo" src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Logo_Tut_Wuri_Handayani.png" alt="Logo Sekolah">
-        <h1 id="display-school-name">NAMA SEKOLAH ANDA</h1>
+        <img id="display-logo" src="logo tb.jpg" alt="Logo Sekolah" width="120">
+        
+        <h1 id="display-school-name">SMAS YPPK TERUNA BAKTI</h1>
         <div class="sub-header">Pengumuman Kelulusan Peserta Didik T.A 2025/2026</div>
     </div>
 
     <div class="card" id="main-content">
-        
-        <div id="timer-ui">
-            <h4 style="margin: 0; color: #bfdbfe; font-weight: 500; font-size: 14px; font-family: var(--font-body);">PENGUMUMAN DIBUKA DALAM:</h4>
-            <div class="timer-container">
-                <div class="timer-box"><span class="timer-val" id="d">00</span><span class="timer-label">Hari</span></div>
-                <div class="timer-box"><span class="timer-val" id="h">00</span><span class="timer-label">Jam</span></div>
-                <div class="timer-box"><span class="timer-val" id="m">00</span><span class="timer-label">Menit</span></div>
-                <div class="timer-box"><span class="timer-val" id="s">00</span><span class="timer-label">Detik</span></div>
-            </div>
-            <p style="font-size: 12px; color: #e2e8f0; position: relative; z-index: 2;">Harap bersabar, sistem terkunci hingga waktu yang ditentukan.</p>
-        </div>
-
         <div id="search-area">
             <h2 style="margin-top: 0;">Cek Status Kelulusan</h2>
             <p style="font-size: 14px; color: #e2e8f0; margin-bottom: 25px; position: relative; z-index: 2;">Masukkan Nomor Induk Siswa Nasional (NISN) Anda ke dalam kolom di bawah ini.</p>
@@ -217,127 +116,293 @@
                 <div style="font-size: 12px; color: #bfdbfe; text-transform: uppercase; font-weight: 600;">Nama Peserta Didik:</div>
                 <h2 id="res-nama" style="font-size: 24px; margin: 5px 0 0;">-</h2>
                 <div id="res-nisn" style="font-size: 13px; color: #e2e8f0; margin-bottom: 20px;">NISN: -</div>
-                
                 <div style="width: 50px; height: 1px; background: rgba(255,255,255,0.3); margin: 0 auto 15px;"></div>
-                
                 <div style="font-size: 12px; color: #bfdbfe; text-transform: uppercase; font-weight: 600;">Dinyatakan:</div>
                 <div id="res-status" class="status-badge">-</div>
-                
                 <div id="res-msg" style="font-size: 14px; line-height: 1.6; margin-top: 10px;"></div>
             </div>
             <button class="btn-check btn-outline" onclick="location.reload()">Cek Siswa Lain</button>
         </div>
     </div>
 
-    <div class="card" id="admin-panel" style="max-height: 85vh; overflow-y: auto;">
-        <h2><i class="fas fa-shield-alt" style="margin-right: 8px;"></i>Panel Administrator</h2>
-        
-        <p>1. Nama Sekolah</p>
-        <input type="text" id="set-sch-name" placeholder="Contoh: SMA NEGERI 1 JAKARTA">
-        
-        <p>2. Jadwal Buka Pengumuman</p>
-        <input type="datetime-local" id="set-sch-time">
-
-        <p>3. Pilihan Gaya Tulisan (Font Tema)</p>
-        <select id="set-sch-font">
-            <option value="poppins">Modern & Elegan (Poppins + Playfair)</option>
-            <option value="montserrat">Klasik & Formal (Montserrat + Merriweather)</option>
-            <option value="roboto">Standar & Rapi (Roboto + Roboto Slab)</option>
-            <option value="quicksand">Ramah & Dinamis (Quicksand + Nunito)</option>
-        </select>
-
-        <p>4. Upload Logo Sekolah (Opsional)</p>
-        <div class="upload-box">
-            <input type="file" id="set-sch-logo" accept="image/png, image/jpeg, image/jpg" style="display: none;">
-            <label for="set-sch-logo">
-                <i class="fas fa-image fa-2x"></i><br>
-                <span id="logo-label">Pilih File Logo Baru (.jpg / .png)</span>
-            </label>
-        </div>
-
-        <p>5. Database Siswa (Excel .xlsx / .csv)</p>
-        <div class="upload-box">
-            <input type="file" id="set-sch-db" accept=".xlsx, .csv" style="display: none;">
-            <label for="set-sch-db">
-                <i class="fas fa-file-excel fa-2x"></i><br>
-                <span id="db-label">Pilih File Data Kelulusan</span>
-            </label>
-        </div>
-
-        <button class="btn-check" id="btn-save" onclick="simpanAdmin()">Simpan Semua Perubahan</button>
-        <button class="btn-check btn-outline" onclick="location.reload()">Batal & Keluar</button>
-    </div>
-
-    <div class="footer-credit">
-        Design by MNF & VM
-    </div>
-
-    <div class="admin-toggle" onclick="bukaAdmin()"><i class="fas fa-cog"></i></div>
+    <div class="footer-credit">Design by MNF & VM</div>
 
     <script>
-        // Logika Utama (Versi 8 + Credit)
-        let db = JSON.parse(localStorage.getItem('skl_db_v8')) || [];
-        let config = JSON.parse(localStorage.getItem('skl_config_v8')) || {
-            name: "SMA NEGERI 1 CONTOH",
-            time: "2026-05-05T10:00",
-            logo: "https://upload.wikimedia.org/wikipedia/commons/9/9c/Logo_Tut_Wuri_Handayani.png",
-            font: "poppins"
-        };
-
-        // Fungsi Terapkan Font
-        function applyThemeFont(fontChoice) {
-            const root = document.documentElement;
-            if (fontChoice === 'montserrat') {
-                root.style.setProperty('--font-body', "'Montserrat', sans-serif");
-                root.style.setProperty('--font-heading', "'Merriweather', serif");
-            } else if (fontChoice === 'roboto') {
-                root.style.setProperty('--font-body', "'Roboto', sans-serif");
-                root.style.setProperty('--font-heading', "'Roboto Slab', serif");
-            } else if (fontChoice === 'quicksand') {
-                root.style.setProperty('--font-body', "'Quicksand', sans-serif");
-                root.style.setProperty('--font-heading', "'Nunito', sans-serif");
-            } else { // Default (Poppins)
-                root.style.setProperty('--font-body', "'Poppins', sans-serif");
-                root.style.setProperty('--font-heading', "'Playfair Display', serif");
-            }
-        }
-
-        // Terapkan Konfigurasi Awal
-        applyThemeFont(config.font);
-        document.getElementById('display-school-name').innerText = config.name;
-        document.getElementById('display-logo').src = config.logo;
-        
-        // Timer
-        const tInterval = setInterval(() => {
-            const now = new Date().getTime();
-            const target = new Date(config.time).getTime();
-            const diff = target - now;
-
-            if (diff <= 0) {
-                clearInterval(tInterval);
-                document.getElementById('timer-ui').style.display = 'none';
-                document.getElementById('search-area').style.display = 'block';
-            } else {
-                document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-                document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-                document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-                document.getElementById('s').innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
-            }
-        }, 1000);
+        // =========================================================================
+        // DATA SISWA (PENGGANTI FILE CSV - DITANAM LANGSUNG DI KODE)
+        // Jika tahun depan ada siswa baru, Anda cukup mengganti data di bawah ini.
+        // =========================================================================
+        const dataSiswa = [
+          {"Nama": "ADOLF VALENTINO APITULEY TUTUPO", "NISN": "0086614300", "Keterangan": "Lulus"},
+          {"Nama": "ALVANA AMELIA FANATAF", "NISN": "0088007487", "Keterangan": "Lulus"},
+          {"Nama": "ANANDA FEBSYA PARANOAN", "NISN": "0083113101", "Keterangan": "Lulus"},
+          {"Nama": "ANGELA DWITA SIRINGORINGO", "NISN": "0088561363", "Keterangan": "Lulus"},
+          {"Nama": "ARUNG BONE", "NISN": "0054876745", "Keterangan": "Lulus"},
+          {"Nama": "CATHRINA WARANDEWIN WAIMURI", "NISN": "0089060040", "Keterangan": "Lulus"},
+          {"Nama": "DANIELSON OCTAVIAN ARONGGEAR", "NISN": "0083319290", "Keterangan": "Lulus"},
+          {"Nama": "DESERA ENJELI KARO KARO", "NISN": "0071552475", "Keterangan": "Lulus"},
+          {"Nama": "DEVID FELIX KABAK", "NISN": "0081220590", "Keterangan": "Lulus"},
+          {"Nama": "ELVARETTA JACKLYN AUPE", "NISN": "0077530971", "Keterangan": "Lulus"},
+          {"Nama": "EZRAELA MIKHELTY MODOUW", "NISN": "0071749341", "Keterangan": "Lulus"},
+          {"Nama": "FERMANNA ARGA SIMANJUNTAK", "NISN": "0082668279", "Keterangan": "Lulus"},
+          {"Nama": "FRANSISKUS FEBRIANO MAMBAYA", "NISN": "0085463871", "Keterangan": "Lulus"},
+          {"Nama": "GLENN IMANUEL", "NISN": "0085541979", "Keterangan": "Lulus"},
+          {"Nama": "IMANUEL FERNANDO KEFAS GASPERSZ", "NISN": "0082736522", "Keterangan": "Lulus"},
+          {"Nama": "ISZER EDBERT OZORA GADING", "NISN": "0077625377", "Keterangan": "Lulus"},
+          {"Nama": "JACQUELINE JOI TOISUTA", "NISN": "0074270832", "Keterangan": "Lulus"},
+          {"Nama": "JESSICA SEYSZA AKOLLO", "NISN": "0071389304", "Keterangan": "Lulus"},
+          {"Nama": "KRISANGTUS LUTURDAS", "NISN": "0088784304", "Keterangan": "Lulus"},
+          {"Nama": "LAURA ATHA MAYSA ARYANDI", "NISN": "0082187382", "Keterangan": "Lulus"},
+          {"Nama": "LAVRYL LOUVREE LAZORE", "NISN": "0085989271", "Keterangan": "Lulus"},
+          {"Nama": "LUCIA ESTERLIN STINETA AWARAWI", "NISN": "0089185136", "Keterangan": "Lulus"},
+          {"Nama": "NAZARIO ALEXANDRE ARDAMIS", "NISN": "0085134241", "Keterangan": "Lulus"},
+          {"Nama": "NEISYA MARCELA ANTONIA NGAMEL", "NISN": "0083359487", "Keterangan": "Lulus"},
+          {"Nama": "PIERRE FRANZCHESCO EDUARDO APITULEY", "NISN": "0087201610", "Keterangan": "Lulus"},
+          {"Nama": "PRAKAS DIWARDHANA", "NISN": "0081697491", "Keterangan": "Lulus"},
+          {"Nama": "RICHARD TANJAYA", "NISN": "0085917803", "Keterangan": "Lulus"},
+          {"Nama": "RIFALDO YOHANIS KAMBU", "NISN": "0076493929", "Keterangan": "Lulus"},
+          {"Nama": "TRIVENA RACHEL TITALEY", "NISN": "0088698522", "Keterangan": "Lulus"},
+          {"Nama": "YUDEA GABRIELA MELODIES SAMBUR", "NISN": "0077124120", "Keterangan": "Lulus"},
+          {"Nama": "ABRAHAM OKTOVIANUS SAFKAUR", "NISN": "0079371246", "Keterangan": "Lulus"},
+          {"Nama": "ANA FEBRYANTI RAHAWARIN", "NISN": "0081210027", "Keterangan": "Lulus"},
+          {"Nama": "ARLIN CHRISTA PRISCILLA LAMANEPA", "NISN": "0075859922", "Keterangan": "Lulus"},
+          {"Nama": "BRAYEN RONALD RAJAGUKGUK", "NISN": "0076257978", "Keterangan": "Lulus"},
+          {"Nama": "BRIAN BILLY A. UKAGO", "NISN": "81595977", "Keterangan": "Lulus"},
+          {"Nama": "DEARLINO APRILIO JUAN DIEGO JEGAMBUT", "NISN": "0088558681", "Keterangan": "Lulus"},
+          {"Nama": "DIFAL MANUPUTTY", "NISN": "0084209325", "Keterangan": "Lulus"},
+          {"Nama": "DITERTIN PETRONELA RONSUMBRE", "NISN": "0081514510", "Keterangan": "Lulus"},
+          {"Nama": "ELIS MERI YOLANDA TABUNI", "NISN": "0073139757", "Keterangan": "Lulus"},
+          {"Nama": "FELICIA PUTRI ANASTACIA SUHADI", "NISN": "0071330394", "Keterangan": "Lulus"},
+          {"Nama": "FLORENTINA BUPU LONDA", "NISN": "0082459188", "Keterangan": "Lulus"},
+          {"Nama": "GABRIEL GODGIVEN LENSUN", "NISN": "0087188605", "Keterangan": "Lulus"},
+          {"Nama": "GABRIELA FAYA CLARISSA KOCU", "NISN": "0085565063", "Keterangan": "Lulus"},
+          {"Nama": "GLORIA NATALIA RUMAGIT", "NISN": "0074447249", "Keterangan": "Lulus"},
+          {"Nama": "GRACIA INDRIANI HEHANUSSA", "NISN": "0084257378", "Keterangan": "Lulus"},
+          {"Nama": "HERLIN MARTA PAHABOL", "NISN": "0088869609", "Keterangan": "Lulus"},
+          {"Nama": "HIZKIA RAFAEL SIHOMBING", "NISN": "0078465623", "Keterangan": "Lulus"},
+          {"Nama": "JANE ANGEL FLORESITA WOMBI", "NISN": "3087230164", "Keterangan": "Lulus"},
+          {"Nama": "JEANNY PRINCES SHANIA MONIM", "NISN": "0089755923", "Keterangan": "Lulus"},
+          {"Nama": "JUAN KEVIN TOMASOA", "NISN": "3089535809", "Keterangan": "Lulus"},
+          {"Nama": "JULIAN CHRIPTOCARPUS SOLISSA", "NISN": "0082245349", "Keterangan": "Lulus"},
+          {"Nama": "KESYA DELSI", "NISN": "0085122748", "Keterangan": "Lulus"},
+          {"Nama": "KRISTINA SIPORA KOSAY", "NISN": "3083444764", "Keterangan": "Lulus"},
+          {"Nama": "MEISTHYANTI SUASIA TAA", "NISN": "0066613402", "Keterangan": "Lulus"},
+          {"Nama": "MEZZA ANDREA", "NISN": "0081400270", "Keterangan": "Lulus"},
+          {"Nama": "NAPTWO CLAUDE BEPJWA GOMBO", "NISN": "0075496649", "Keterangan": "Lulus"},
+          {"Nama": "NARANDRA LEONARDO MALA RANTETAMPANG", "NISN": "3070157378", "Keterangan": "Lulus"},
+          {"Nama": "NEHEMIA FRANS HOWAY", "NISN": "0089663332", "Keterangan": "Lulus"},
+          {"Nama": "STELLA MARIS LEONTIN GUYANA TEMORUBUN", "NISN": "0071547494", "Keterangan": "Lulus"},
+          {"Nama": "TRIVENA GLORIA HAAY", "NISN": "85744815", "Keterangan": "Lulus"},
+          {"Nama": "WILDARIA GOMBO", "NISN": "0086172491", "Keterangan": "Lulus"},
+          {"Nama": "YOSEPH FRANSISKUS MEAGA", "NISN": "0077228564", "Keterangan": "Lulus"},
+          {"Nama": "ABELIA MARIA RAMAWATI PALIMHE KOSSAY", "NISN": "0091727435", "Keterangan": "Lulus"},
+          {"Nama": "AFEN KRISMAOLIONA B. SOBOLIM", "NISN": "0071091202", "Keterangan": "Lulus"},
+          {"Nama": "ANJELA IGN. PK. ADII", "NISN": "0089008909", "Keterangan": "Lulus"},
+          {"Nama": "APLIMNONG SAKAN NHATANIEL TAPYOR", "NISN": "3087739969", "Keterangan": "Lulus"},
+          {"Nama": "ATALIA WREDE KAFIAR", "NISN": "0083197894", "Keterangan": "Lulus"},
+          {"Nama": "BERNARDUS IVO MARBUN", "NISN": "0087219389", "Keterangan": "Lulus"},
+          {"Nama": "CERIAMA GRISELDA SIMANJUNTAK", "NISN": "0083421361", "Keterangan": "Lulus"},
+          {"Nama": "DAHLIA CITRA ANGELINA ARYESAM", "NISN": "0077291764", "Keterangan": "Lulus"},
+          {"Nama": "DILAN DWY XAVEYRIN BABUR", "NISN": "0076000129", "Keterangan": "Lulus"},
+          {"Nama": "ELIA MELKISEDEK SAA", "NISN": "0079595139", "Keterangan": "Lulus"},
+          {"Nama": "EZRA WILLIAM SERONTOU", "NISN": "0096266955", "Keterangan": "Lulus"},
+          {"Nama": "FIRGIE CLAUDIA YOFIN MUABUAY", "NISN": "0073056999", "Keterangan": "Lulus"},
+          {"Nama": "FIRXZANDER MAGAWIYAI KEIYA", "NISN": "0093167750", "Keterangan": "Lulus"},
+          {"Nama": "FRANSISKA SEKAR WULANDARI MAMO", "NISN": "0088578542", "Keterangan": "Lulus"},
+          {"Nama": "GALIO ARERA", "NISN": "0074656853", "Keterangan": "Lulus"},
+          {"Nama": "GIOVANI ISRAEL JUAN JUNIOR KASSE", "NISN": "0082964475", "Keterangan": "Lulus"},
+          {"Nama": "GRACE ELSHADAI SUMEISEY", "NISN": "0086702273", "Keterangan": "Lulus"},
+          {"Nama": "HANNA CLAUDIA MARINI", "NISN": "0082231295", "Keterangan": "Lulus"},
+          {"Nama": "HELENA PASARIBU", "NISN": "0076617759", "Keterangan": "Lulus"},
+          {"Nama": "JANET JELITA NADIA YEWI", "NISN": "0091050152", "Keterangan": "Lulus"},
+          {"Nama": "JOSEANO AMY FERDINAND RUMBEWAS", "NISN": "3089892825", "Keterangan": "Lulus"},
+          {"Nama": "JUDITH PETRA APRILIA MARBUN", "NISN": "0082281437", "Keterangan": "Lulus"},
+          {"Nama": "JUNANDO RIZKY TOHIUKA", "NISN": "0086432458", "Keterangan": "Lulus"},
+          {"Nama": "KARIN ALICIA AKIHARY", "NISN": "3084287368", "Keterangan": "Lulus"},
+          {"Nama": "KEZIA WAGAGE PIGAI", "NISN": "0085363206", "Keterangan": "Lulus"},
+          {"Nama": "MARIA LEONISANTI YERWUAN", "NISN": "0082758642", "Keterangan": "Lulus"},
+          {"Nama": "MERCY LUCIANA PARHUSIP", "NISN": "0084129867", "Keterangan": "Lulus"},
+          {"Nama": "NOVENA MARIA WESS WAFOM", "NISN": "0083470583", "Keterangan": "Lulus"},
+          {"Nama": "RYAN MARRIO MITAKDA", "NISN": "0075022879", "Keterangan": "Lulus"},
+          {"Nama": "TALITA APRILIA SIAHAYA", "NISN": "0086166015", "Keterangan": "Lulus"},
+          {"Nama": "VEXILLA CHRISTE JUNICA CHEN", "NISN": "0088489346", "Keterangan": "Lulus"},
+          {"Nama": "WELDIANTA PANGLOLI", "NISN": "0078199619", "Keterangan": "Lulus"},
+          {"Nama": "YOSEPHINE M. BOSEREN", "NISN": "3069493866", "Keterangan": "Lulus"},
+          {"Nama": "YULIUS B. DOGOMO", "NISN": "0094580669", "Keterangan": "Lulus"},
+          {"Nama": "ABRAHAM ALICAMPBELL ANSANAY", "NISN": "0071197335", "Keterangan": "Lulus"},
+          {"Nama": "AGUSTINA DEKMOM", "NISN": "3081579129", "Keterangan": "Lulus"},
+          {"Nama": "ANASTASYA OLIVIA TOJA", "NISN": "3076651714", "Keterangan": "Lulus"},
+          {"Nama": "ANNE MARRIE", "NISN": "0083396961", "Keterangan": "Lulus"},
+          {"Nama": "CLAUDIUS FABRISIO SINA PIRAN", "NISN": "0087063206", "Keterangan": "Lulus"},
+          {"Nama": "DESMUNANTO CLEON NAMBAR KAMAN", "NISN": "72341205", "Keterangan": "Lulus"},
+          {"Nama": "DOMINSON RONALDO RUMASEB", "NISN": "0072758525", "Keterangan": "Lulus"},
+          {"Nama": "ELISABETH YUPERLIN SISILIA PAHABOL", "NISN": "0072590283", "Keterangan": "Lulus"},
+          {"Nama": "EMANUEL BOBII", "NISN": "3087758597", "Keterangan": "Lulus"},
+          {"Nama": "EPOOPI KEIYA", "NISN": "0073015625", "Keterangan": "Lulus"},
+          {"Nama": "FRANSISKO TAA", "NISN": "3086084023", "Keterangan": "Lulus"},
+          {"Nama": "FRANSISCA JUANITA PANGALA", "NISN": "3071426331", "Keterangan": "Lulus"},
+          {"Nama": "FRIEDOLIN IMBENAI", "NISN": "0074949668", "Keterangan": "Lulus"},
+          {"Nama": "GENEVA RUM LOKBERE", "NISN": "3072674508", "Keterangan": "Lulus"},
+          {"Nama": "GRESBERT KOBOGAU", "NISN": "0073041718", "Keterangan": "Lulus"},
+          {"Nama": "JAMES IMANUEL PILAMO SIEP", "NISN": "0078265228", "Keterangan": "Lulus"},
+          {"Nama": "JEBELINA Y. EPA", "NISN": "0077162789", "Keterangan": "Lulus"},
+          {"Nama": "JEFRI PIGAI", "NISN": "0067935807", "Keterangan": "Lulus"},
+          {"Nama": "JEROL MICHEL TALABESSY", "NISN": "0074421250", "Keterangan": "Lulus"},
+          {"Nama": "LISTIANI SAFRINA DIAP BAKARAN", "NISN": "0089700660", "Keterangan": "Lulus"},
+          {"Nama": "MARELA KUM", "NISN": "3042557299", "Keterangan": "Lulus"},
+          {"Nama": "MARGARET TIRTA SATORIA WANGGUAY", "NISN": "0094580670", "Keterangan": "Lulus"},
+          {"Nama": "MARIA MARGARETH MALITALO", "NISN": "0081857634", "Keterangan": "Lulus"},
+          {"Nama": "MARIA OCTAVIANA SABU NIRON", "NISN": "0065333226", "Keterangan": "Lulus"},
+          {"Nama": "MAURISTHIA MEIFIN SIRRUN", "NISN": "0086560096", "Keterangan": "Lulus"},
+          {"Nama": "MODESTA JENITA TAPYOR", "NISN": "0079596282", "Keterangan": "Lulus"},
+          {"Nama": "MUSA KELANANGGAME", "NISN": "0077262908", "Keterangan": "Lulus"},
+          {"Nama": "NATHALIA SONYA HETREDA MOESIERI", "NISN": "0065330452", "Keterangan": "Lulus"},
+          {"Nama": "PUTRYA RITHA RONSUMBRE", "NISN": "0088461160", "Keterangan": "Lulus"},
+          {"Nama": "SEILA WUMANGGE", "NISN": "3078212851", "Keterangan": "Lulus"},
+          {"Nama": "SEM MARTHEN CHRISTO CASTILLO KIKI", "NISN": "0076213966", "Keterangan": "Lulus"},
+          {"Nama": "VICO SAHETAPY", "NISN": "0083292236", "Keterangan": "Lulus"},
+          {"Nama": "YONATHAN ALBERTO TENAU", "NISN": "0084355198", "Keterangan": "Lulus"},
+          {"Nama": "YUBELIKA AGATA A. ISAYHE WETIPO", "NISN": "0088481266", "Keterangan": "Lulus"},
+          {"Nama": "ALEXANDRA ALVIANI PUTRI LANY ASSO", "NISN": "0081317207", "Keterangan": "Lulus"},
+          {"Nama": "ALFREDO AMERDIN WANIA", "NISN": "0081595978", "Keterangan": "Lulus"},
+          {"Nama": "APRILISA MARIYANTI TABUNI", "NISN": "0081581319", "Keterangan": "Lulus"},
+          {"Nama": "AUSTIEN CITY ANGEL SROYER", "NISN": "0083709031", "Keterangan": "Lulus"},
+          {"Nama": "BENEDICHTO YOGI TOSULI", "NISN": "0086434330", "Keterangan": "Lulus"},
+          {"Nama": "BRANDON JONATHAN LEVYO GALSTAUN", "NISN": "0079277314", "Keterangan": "Lulus"},
+          {"Nama": "CARL WILLEM OTTOW SAA", "NISN": "0071106288", "Keterangan": "Lulus"},
+          {"Nama": "DANILO FERNANDO TABUNI", "NISN": "3077611047", "Keterangan": "Lulus"},
+          {"Nama": "ELISABETH BOMA", "NISN": "0081112132", "Keterangan": "Lulus"},
+          {"Nama": "EPILINDE WAKUR", "NISN": "0069542423", "Keterangan": "Lulus"},
+          {"Nama": "GABRIEL TUHUMURY", "NISN": "0072183713", "Keterangan": "Lulus"},
+          {"Nama": "GEORGE KEVINSCO VARELLO DE FRETES", "NISN": "0089139325", "Keterangan": "Lulus"},
+          {"Nama": "ITHAMAR VIDYA CHRYSLIEN YEPESE", "NISN": "0082636223", "Keterangan": "Lulus"},
+          {"Nama": "IVA RIVALINCE HELAKOMBO", "NISN": "0084352880", "Keterangan": "Lulus"},
+          {"Nama": "JULIA ABIGAIL MALAMBA", "NISN": "0074522970", "Keterangan": "Lulus"},
+          {"Nama": "JUVENDI KOTEKA DOGOMO", "NISN": "3079718737", "Keterangan": "Lulus"},
+          {"Nama": "LEORGE ORIS PEKEI", "NISN": "3086364485", "Keterangan": "Lulus"},
+          {"Nama": "MALUKWE YIKWA", "NISN": "0069733473", "Keterangan": "Lulus"},
+          {"Nama": "MARIA HELMINA KEDEIKOTO", "NISN": "3071843757", "Keterangan": "Lulus"},
+          {"Nama": "MARINUS NATKIME", "NISN": "0068459966", "Keterangan": "Lulus"},
+          {"Nama": "MARIO JOSEF TETHOOL", "NISN": "3087353982", "Keterangan": "Lulus"},
+          {"Nama": "MARVIC RONSUMBRE", "NISN": "0074912927", "Keterangan": "Lulus"},
+          {"Nama": "MAURIDS KUMBIAKI BOERDAM", "NISN": "0089674273", "Keterangan": "Lulus"},
+          {"Nama": "MELLAGRO CHAYROS SIPAHELUT", "NISN": "0075076095", "Keterangan": "Lulus"},
+          {"Nama": "MUNIR WANIMBO", "NISN": "0086949422", "Keterangan": "Lulus"},
+          {"Nama": "OTA MARIA GORETY ONNA", "NISN": "0073014744", "Keterangan": "Lulus"},
+          {"Nama": "RISPAINDO KORWA", "NISN": "0087247466", "Keterangan": "Lulus"},
+          {"Nama": "ROY STENLY ASABO", "NISN": "0079629529", "Keterangan": "Lulus"},
+          {"Nama": "SAUT ARJUNA HUTAHAEAN", "NISN": "0088358208", "Keterangan": "Lulus"},
+          {"Nama": "SIANNE MARGREET RUTH ROSELINA SROYER", "NISN": "0087267262", "Keterangan": "Lulus"},
+          {"Nama": "VIKIN CHRISTIAN WAKERKWA", "NISN": "0079679177", "Keterangan": "Lulus"},
+          {"Nama": "AMSAL SEPJUWAN KOGOYA", "NISN": "0071474839", "Keterangan": "Lulus"},
+          {"Nama": "ANGELINA LUSIA WONGAWAE", "NISN": "0088922232", "Keterangan": "Lulus"},
+          {"Nama": "ARSENIA YENI TRIANA SEUK SERAN", "NISN": "3077195549", "Keterangan": "Lulus"},
+          {"Nama": "CHRISTIEN ERRICK DENSIE PUTRI ARDAMIS", "NISN": "0077755758", "Keterangan": "Lulus"},
+          {"Nama": "CHRISTO ARIEL LEATEMIA", "NISN": "0077436324", "Keterangan": "Lulus"},
+          {"Nama": "DANIEL OHEE", "NISN": "0075523622", "Keterangan": "Lulus"},
+          {"Nama": "DINA FLORIDA TABISU", "NISN": "0077505901", "Keterangan": "Lulus"},
+          {"Nama": "DONIPKI RIVAI BIDANA", "NISN": "0076681108", "Keterangan": "Lulus"},
+          {"Nama": "EMO ANGGELITA INTAN BELAU", "NISN": "0079612424", "Keterangan": "Lulus"},
+          {"Nama": "FITRI", "NISN": "0072035380", "Keterangan": "Lulus"},
+          {"Nama": "FRANSISKA TRIVOLIA DEDA", "NISN": "0089792115", "Keterangan": "Lulus"},
+          {"Nama": "GERALDO M. KAILUHU", "NISN": "0085700700", "Keterangan": "Lulus"},
+          {"Nama": "GODFRIDUS KIKY MADEIRA", "NISN": "0082515999", "Keterangan": "Lulus"},
+          {"Nama": "GRACE TALIA SWASTIKA SIMANJUNTAK", "NISN": "3083891565", "Keterangan": "Lulus"},
+          {"Nama": "INANG YATI INDAH REUMY", "NISN": "0077261397", "Keterangan": "Lulus"},
+          {"Nama": "ITALIA WALELA", "NISN": "0078624545", "Keterangan": "Lulus"},
+          {"Nama": "IZABELLA AYU SIMOPIAREF", "NISN": "0083127861", "Keterangan": "Lulus"},
+          {"Nama": "JELIANA MESAK", "NISN": "0083666056", "Keterangan": "Lulus"},
+          {"Nama": "KERINUS KELABETME", "NISN": "0075082686", "Keterangan": "Lulus"},
+          {"Nama": "KILYON KIRIHIO", "NISN": "0075082686", "Keterangan": "Lulus"},
+          {"Nama": "MARTA MARGARETH EPA", "NISN": "0074478032", "Keterangan": "Lulus"},
+          {"Nama": "MARTINUS DUWITAU", "NISN": "3053153402", "Keterangan": "Lulus"},
+          {"Nama": "OLINCE PIGOME", "NISN": "3053153402", "Keterangan": "Lulus"},
+          {"Nama": "PASKAL ALVARO JASTIN BERNIFU", "NISN": "0087597481", "Keterangan": "Lulus"},
+          {"Nama": "PASKALIS ANDREAS MAGAI", "NISN": "0098413124", "Keterangan": "Lulus"},
+          {"Nama": "PINSEN MABEL", "NISN": "0098909603", "Keterangan": "Lulus"},
+          {"Nama": "SARI HERMANA DUMATUBUN", "NISN": "0081773972", "Keterangan": "Lulus"},
+          {"Nama": "SEMINUS ALEXANDER KENANGALEM", "NISN": "0079210148", "Keterangan": "Lulus"},
+          {"Nama": "SISCA TUU", "NISN": "0032869115", "Keterangan": "Lulus"},
+          {"Nama": "SYAHRANDI SARIRA", "NISN": "0087952004", "Keterangan": "Lulus"},
+          {"Nama": "YEREMIA ANUGERAH LUMBU", "NISN": "0074572564", "Keterangan": "Lulus"},
+          {"Nama": "YUBELISA MAAY", "NISN": "0086344894", "Keterangan": "Lulus"},
+          {"Nama": "ABIGAIL AVIEL LATUPEIRISSA", "NISN": "0087250559", "Keterangan": "Lulus"},
+          {"Nama": "ALDO HENGKI PITO PAPA MOTE", "NISN": "0084371713", "Keterangan": "Lulus"},
+          {"Nama": "CHETRIN ELIZABETH ANGELICUS ISIR", "NISN": "0072201288", "Keterangan": "Lulus"},
+          {"Nama": "CHRISTIN LEA RUMBIAK", "NISN": "0075201935", "Keterangan": "Lulus"},
+          {"Nama": "CORY LUCIANA KAYE", "NISN": "0083354526", "Keterangan": "Lulus"},
+          {"Nama": "EMA MARIANA PEMBWAIN", "NISN": "0071763533", "Keterangan": "Lulus"},
+          {"Nama": "EMANUEL TEBAI", "NISN": "0077671291", "Keterangan": "Lulus"},
+          {"Nama": "HENGKI LALA'AR", "NISN": "0089847268", "Keterangan": "Lulus"},
+          {"Nama": "KARIN WEHELMINA MANSAWAN", "NISN": "0085436104", "Keterangan": "Lulus"},
+          {"Nama": "KARTIKA SOPRANITA WARINUSSI", "NISN": "0077523427", "Keterangan": "Lulus"},
+          {"Nama": "LAURENSIA IYAI", "NISN": "0096643367", "Keterangan": "Lulus"},
+          {"Nama": "LIA SOVIANA SOBOLIM", "NISN": "307698106", "Keterangan": "Lulus"},
+          {"Nama": "MARIA EVITA GUNARDI TARRA", "NISN": "0079657139", "Keterangan": "Lulus"},
+          {"Nama": "MARSELINO RIKY PEKEI", "NISN": "0089744384", "Keterangan": "Lulus"},
+          {"Nama": "MARTHINO JEREMIA I. AFAAR", "NISN": "0072957078", "Keterangan": "Lulus"},
+          {"Nama": "OSCERLA KENZO ARLEN KOGOYA", "NISN": "0088971165", "Keterangan": "Lulus"},
+          {"Nama": "PETRUS ALFREDO LALA'AR", "NISN": "0089074645", "Keterangan": "Lulus"},
+          {"Nama": "TEVEZ JOSE RUMBEKWAN", "NISN": "0071275811", "Keterangan": "Lulus"},
+          {"Nama": "VAN GESSEL PURARO", "NISN": "0082526360", "Keterangan": "Lulus"},
+          {"Nama": "VICTORIA ELSA FRANDORA APAY", "NISN": "0082398911", "Keterangan": "Lulus"},
+          {"Nama": "VIKTORIA ESTER R. OGOBUE", "NISN": "0086329499", "Keterangan": "Lulus"},
+          {"Nama": "YOHANES MARCO MAGAI", "NISN": "0069667092", "Keterangan": "Lulus"},
+          {"Nama": "ABNER SUHUN", "NISN": "0056802801", "Keterangan": "Lulus"},
+          {"Nama": "AGUSTINUS PIGOME", "NISN": "3066012664", "Keterangan": "Lulus"},
+          {"Nama": "ALYCIA MERDEKAWATI RETNO PRANOTO RANDONGKIR", "NISN": "0086208808", "Keterangan": "Lulus"},
+          {"Nama": "DANIELOW KENANGALEM", "NISN": "0089012060", "Keterangan": "Lulus"},
+          {"Nama": "DAUD OHEE", "NISN": "3085245782", "Keterangan": "Lulus"},
+          {"Nama": "DENIS KAREL OTNIEL TUKAYO", "NISN": "0089286191", "Keterangan": "Lulus"},
+          {"Nama": "ELISABET KUDIAI", "NISN": "0071658543", "Keterangan": "Lulus"},
+          {"Nama": "FIRNANDO YANUARING", "NISN": "0071989579", "Keterangan": "Lulus"},
+          {"Nama": "HAPUA YEDICA HELAKOMBO", "NISN": "0074854596", "Keterangan": "Lulus"},
+          {"Nama": "KORINUS KELVIN KURNI", "NISN": "0063156032", "Keterangan": "Lulus"},
+          {"Nama": "MAKSILIA KASIPMABIN", "NISN": "3156028317", "Keterangan": "Lulus"},
+          {"Nama": "MARTEN A MOTE", "NISN": "3076982274", "Keterangan": "Lulus"},
+          {"Nama": "MINCHE PARSELIA ANINAM", "NISN": "3136594702", "Keterangan": "Lulus"},
+          {"Nama": "IAQUINTA PALULUN PATANDIANAN", "NISN": "0081707569", "Keterangan": "Lulus"},
+          {"Nama": "JECKLIN STIN KAROBA MEDLAMA", "NISN": "0083930558", "Keterangan": "Lulus"},
+          {"Nama": "JOSE DE ZAVIOUR SALAKORY", "NISN": "0081537912", "Keterangan": "Lulus"},
+          {"Nama": "KIRON KULLA", "NISN": "0069551716", "Keterangan": "Lulus"},
+          {"Nama": "LANI APRIALDO MUMBO", "NISN": "0088321892", "Keterangan": "Lulus"},
+          {"Nama": "LENORA SEPTIANA KAKISINA", "NISN": "0071778326", "Keterangan": "Lulus"},
+          {"Nama": "LEONARDO DION AIM", "NISN": "3033436802", "Keterangan": "Lulus"},
+          {"Nama": "MARGARETA SANCE KIMBUOP", "NISN": "0074941182", "Keterangan": "Lulus"},
+          {"Nama": "MARSEL SASAKA", "NISN": "3077189813", "Keterangan": "Lulus"},
+          {"Nama": "MELANESIA KOGOYA", "NISN": "0083455085", "Keterangan": "Lulus"},
+          {"Nama": "MICHELLE PAPUANA PUTRI MUDJU", "NISN": "0076727034", "Keterangan": "Lulus"},
+          {"Nama": "NORIS OBAGAME", "NISN": "0065206546", "Keterangan": "Lulus"},
+          {"Nama": "RENOLD HENDRIK GEGAMBUTOP", "NISN": "0077182845", "Keterangan": "Lulus"},
+          {"Nama": "SESILIA NOVITA GOBAI", "NISN": "0076861280", "Keterangan": "Lulus"},
+          {"Nama": "TASYA ROSALINA WENDA", "NISN": "0088537646", "Keterangan": "Lulus"},
+          {"Nama": "TERINTJE STEVANY VIRGILIA IRAWAN", "NISN": "0071084558", "Keterangan": "Lulus"},
+          {"Nama": "USMAN ALIKNOE", "NISN": "0076630133", "Keterangan": "Lulus"},
+          {"Nama": "VALLERIA CHYNTIA BELLE HUBI", "NISN": "0072522854", "Keterangan": "Lulus"},
+          {"Nama": "YERI WAHLA", "NISN": "3082398254", "Keterangan": "Lulus"},
+          {"Nama": "YOHANES WAKEI", "NISN": "0074521295", "Keterangan": "Lulus"},
+          {"Nama": "YOSEFINE EULALIA SIRKEN", "NISN": "3088118294", "Keterangan": "Lulus"},
+          {"Nama": "YOSINA FOUH HOLOMBAUW", "NISN": "0081290476", "Keterangan": "Lulus"},
+          {"Nama": "ZOE JESYCA TUMEWU", "NISN": "0078187003", "Keterangan": "Lulus"}
+        ];
 
         function prosesCek() {
-            if(db.length === 0) return alert("Sistem belum memiliki data. Harap hubungi Admin.");
             const input = document.getElementById('nisn-field').value.trim();
             if(!input) return alert("Masukkan Nomor Induk Siswa Nasional (NISN) Anda!");
 
-            const siswa = db.find(s => s.NISN == input || s.nisn == input);
-            if(!siswa) return alert("Data NISN tidak ditemukan. Pastikan nomor sudah benar.");
+            // Mencari siswa berdasarkan NISN
+            const siswa = dataSiswa.find(s => s.NISN === input);
+            
+            if(!siswa) {
+                return alert("Data dengan NISN " + input + " tidak ditemukan. Pastikan nomor Anda sudah benar.");
+            }
 
+            // Menyembunyikan form pencarian dan menampilkan hasil
             document.getElementById('search-area').style.display = 'none';
             document.getElementById('result-area').style.display = 'block';
 
-            const nama = siswa.Nama || siswa.nama;
-            const status = (siswa.Keterangan || siswa.keterangan || "").toUpperCase();
+            const nama = siswa.Nama;
+            const status = siswa.Keterangan.toUpperCase();
 
             document.getElementById('res-nama').innerText = nama;
             document.getElementById('res-nisn').innerText = "NISN: " + input;
@@ -345,118 +410,15 @@
             const badge = document.getElementById('res-status');
             badge.innerText = status;
 
-            // PESAN DENGAN SAPAAN NAMA
+            // Menentukan warna dan pesan berdasarkan status Lulus/Tidak Lulus
             if(status.includes("LULUS") && !status.includes("TIDAK")) {
                 badge.className = "status-badge status-lulus";
                 document.getElementById('res-msg').innerHTML = "Selamat atas kelulusan, <strong>" + nama + "</strong>! Kerja keras Anda membuahkan hasil. Teruslah terbang tinggi mengejar cita-cita.";
-                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } }); // Efek konfeti
             } else {
                 badge.className = "status-badge status-gagal";
                 document.getElementById('res-msg').innerHTML = "Mohon maaf, <strong>" + nama + "</strong>. Jangan berkecil hati. Kegagalan adalah awal dari perjalanan baru yang lebih kuat. Tetap semangat!";
             }
-        }
-
-        // Buka Panel Admin
-        function bukaAdmin() {
-            if(prompt("Masukkan Password Admin (Default: admin123):") === "admin123") {
-                document.getElementById('main-content').style.display = 'none';
-                document.getElementById('head-ui').style.display = 'none';
-                document.querySelector('.admin-toggle').style.display = 'none';
-                document.body.style.background = "#0f172a"; 
-                document.body.style.backgroundImage = "none";
-                document.querySelector('.footer-credit').style.color = "#475569"; // Redupkan credit di admin
-                
-                document.getElementById('admin-panel').style.display = 'block';
-                document.getElementById('set-sch-name').value = config.name;
-                document.getElementById('set-sch-time').value = config.time;
-                document.getElementById('set-sch-font').value = config.font || 'poppins';
-            } else {
-                alert("Password Salah!");
-            }
-        }
-
-        // Preview saat pilih font di Admin
-        document.getElementById('set-sch-font').addEventListener('change', function() {
-            applyThemeFont(this.value);
-        });
-
-        // Ubah Teks Label File
-        document.getElementById('set-sch-db').onchange = function(e) {
-            if(e.target.files[0]) {
-                document.getElementById('db-label').innerText = "File Excel: " + e.target.files[0].name;
-                document.getElementById('db-label').style.color = "#10b981";
-            }
-        };
-        document.getElementById('set-sch-logo').onchange = function(e) {
-            if(e.target.files[0]) {
-                document.getElementById('logo-label').innerText = "File Logo: " + e.target.files[0].name;
-                document.getElementById('logo-label').style.color = "#10b981";
-            }
-        };
-
-        // Fungsi Membaca File
-        function readFileAsBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = reject;
-                reader.readAsDataURL(file);
-            });
-        }
-        function readExcelAsJSON(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const data = new Uint8Array(e.target.result);
-                    const wb = XLSX.read(data, {type: 'array'});
-                    const json = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
-                    resolve(json);
-                };
-                reader.onerror = reject;
-                reader.readAsArrayBuffer(file);
-            });
-        }
-
-        // Simpan Data Admin
-        async function simpanAdmin() {
-            const btn = document.getElementById('btn-save');
-            btn.innerText = "Memproses..."; btn.disabled = true;
-
-            const newName = document.getElementById('set-sch-name').value.trim();
-            const newTime = document.getElementById('set-sch-time').value;
-            const newFont = document.getElementById('set-sch-font').value;
-            const excelFile = document.getElementById('set-sch-db').files[0];
-            const logoFile = document.getElementById('set-sch-logo').files[0];
-
-            if(newName) config.name = newName;
-            if(newTime) config.time = newTime;
-            config.font = newFont;
-
-            // Proses Logo
-            if(logoFile) {
-                try {
-                    config.logo = await readFileAsBase64(logoFile);
-                } catch(e) { alert("Gagal memproses gambar logo."); }
-            }
-
-            localStorage.setItem('skl_config_v8', JSON.stringify(config));
-
-            // Proses Excel
-            if(excelFile) {
-                try {
-                    const jsonData = await readExcelAsJSON(excelFile);
-                    if(jsonData.length > 0) {
-                        localStorage.setItem('skl_db_v8', JSON.stringify(jsonData));
-                        alert(`Pengaturan tersimpan! Berhasil memuat ${jsonData.length} data siswa.`);
-                    } else {
-                        alert("File Excel kosong atau format tidak sesuai!");
-                    }
-                } catch(e) { alert("Gagal membaca file Excel."); }
-            } else {
-                alert("Pengaturan Berhasil Disimpan!");
-            }
-            
-            location.reload();
         }
     </script>
 </body>
