@@ -34,27 +34,39 @@
             justify-content: center; 
             background-image: radial-gradient(#e2e8f0 1px, transparent 1px); 
             background-size: 20px 20px; 
-            padding-bottom: 50px; 
+            padding: 20px;
             box-sizing: border-box; 
         }
         
         h1, h2 { font-family: var(--font-heading); }
         
-        .header-section { text-align: center; margin-bottom: 30px; animation: fadeInDown 0.8s ease-out; padding: 0 15px; }
-        
-        /* Pengaturan Logo */
-        #display-logo { margin-bottom: 15px; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1)); border-radius: 10px;}
-        
-        #display-school-name { font-size: 32px; color: var(--box-blue-dark); margin: 0; letter-spacing: 1px; font-weight: 700; }
-        .sub-header { font-size: 16px; color: #64748b; font-weight: 500; margin-top: 5px; }
+        .header-section { text-align: center; margin-bottom: 20px; animation: fadeInDown 0.8s ease-out; }
+        #display-logo { margin-bottom: 15px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); border-radius: 10px; width: 100px; }
+        #display-school-name { font-size: clamp(24px, 5vw, 32px); color: var(--box-blue-dark); margin: 0; font-weight: 700; }
+        .sub-header { font-size: 14px; color: #64748b; font-weight: 500; }
+
+        /* Countdown Style */
+        #countdown-container {
+            display: none;
+            margin-bottom: 20px;
+            background: var(--white);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        .timer-grid { display: flex; gap: 15px; justify-content: center; margin-top: 10px; }
+        .timer-box { background: var(--box-blue-dark); color: white; padding: 10px; border-radius: 8px; min-width: 60px; }
+        .timer-box span { display: block; font-size: 24px; font-weight: 700; }
+        .timer-box label { font-size: 10px; text-transform: uppercase; opacity: 0.8; }
 
         .card { 
             background: linear-gradient(135deg, var(--box-blue-dark) 0%, var(--box-blue-light) 100%); 
             color: var(--white); 
-            padding: 40px; 
+            padding: 40px 30px; 
             border-radius: 20px; 
-            width: 90%; 
-            max-width: 500px; 
+            width: 100%; 
+            max-width: 450px; 
             text-align: center; 
             box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2); 
             animation: scaleIn 0.6s ease-out; 
@@ -62,75 +74,160 @@
             overflow: hidden; 
         }
 
+        /* Admin Panel */
+        #admin-panel {
+            display: none;
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 100px rgba(0,0,0,0.5);
+            z-index: 999;
+            width: 90%; max-width: 400px;
+        }
+        #admin-panel h3 { margin-top: 0; color: var(--box-blue-dark); }
+        #admin-panel input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+
         .input-group { margin-bottom: 20px; position: relative; z-index: 2; }
         input[type="text"] { 
             width: 100%; padding: 16px; border: 2px solid rgba(255, 255, 255, 0.2); 
             border-radius: 12px; font-size: 16px; text-align: center; transition: 0.3s; 
-            background: rgba(255, 255, 255, 0.95); color: var(--text-dark); font-family: inherit; box-sizing: border-box; 
+            background: rgba(255, 255, 255, 0.95); color: var(--text-dark); box-sizing: border-box; 
         }
         input[type="text"]:focus { border-color: var(--accent-gold); outline: none; background: #ffffff; box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.3); }
 
         .btn-check { 
             background: var(--accent-gold); color: var(--box-blue-dark); width: 100%; 
             padding: 16px; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; 
-            cursor: pointer; transition: 0.3s; position: relative; z-index: 2; font-family: var(--font-body); 
+            cursor: pointer; transition: 0.3s; position: relative; z-index: 2; font-family: var(--font-body);
         }
-        .btn-check:hover { background: #f59e0b; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); }
+        .btn-check:hover { background: #f59e0b; transform: translateY(-2px); }
         .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255, 255, 255, 0.4); margin-top: 15px; }
-        .btn-outline:hover { background: rgba(255, 255, 255, 0.1); }
 
         .result-frame { background: rgba(255, 255, 255, 0.1); border: 1px dashed rgba(255, 255, 255, 0.4); border-radius: 16px; padding: 30px 20px; margin-top: 20px; position: relative; z-index: 2; }
-        .status-badge { display: inline-block; margin: 15px 0; padding: 8px 30px; font-size: 20px; font-weight: 700; color: white; border-radius: 50px; letter-spacing: 1px; font-family: var(--font-body); }
-        .status-lulus { background: var(--success); box-shadow: 0 8px 15px rgba(16, 185, 129, 0.4); }
+        .status-badge { display: inline-block; margin: 15px 0; padding: 8px 30px; font-size: 22px; font-weight: 700; color: white; border-radius: 50px; }
+        .status-lulus { background: var(--success); box-shadow: 0 8px 15px rgba(16, 185, 129, 0.4); animation: pulse 1.5s infinite; }
         .status-gagal { background: var(--danger); box-shadow: 0 8px 15px rgba(239, 68, 68, 0.4); }
 
-        .footer-credit { position: fixed; bottom: 20px; width: 100%; text-align: center; font-size: 14px; color: #64748b; font-weight: 600; letter-spacing: 1px; z-index: 10; font-family: var(--font-body); }
+        .emot-lulus { font-size: 40px; display: block; margin-bottom: 10px; }
 
-        #result-area { display: none; }
+        .footer-credit { margin-top: 30px; font-size: 12px; color: #94a3b8; cursor: pointer; user-select: none; font-weight: 600;}
+
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        #search-area, #result-area { position: relative; z-index: 5; }
     </style>
 </head>
 <body>
 
-   <div class="header-section" id="head-ui">
-        <img id="display-logo" src="logo.jpg" alt="Logo SMA YPPK Teruna Bakti" width="120">
-        
+    <div class="header-section">
+        <img id="display-logo" src="logo.jpg" alt="Logo">
         <h1 id="display-school-name">SMAS YPPK TERUNA BAKTI</h1>
-        <div class="sub-header">Pengumuman Kelulusan Peserta Didik Kelas XII T.A 2025/2026</div>
+        <div class="sub-header">Pengumuman Kelulusan Peserta Didik T.A 2025/2026</div>
     </div>
 
-    <div class="card" id="main-content">
-        <div id="search-area">
+    <!-- Countdown Section -->
+    <div id="countdown-container">
+        <div style="font-weight: 600; color: var(--box-blue-dark);">PENGUMUMAN AKAN DIBUKA DALAM:</div>
+        <div class="timer-grid">
+            <div class="timer-box"><span id="days">00</span><label>Hari</label></div>
+            <div class="timer-box"><span id="hours">00</span><label>Jam</label></div>
+            <div class="timer-box"><span id="mins">00</span><label>Menit</label></div>
+            <div class="timer-box"><span id="secs">00</span><label>Detik</label></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <!-- Area Pencarian NISN -->
+        <div id="search-area" style="display: none;">
             <h2 style="margin-top: 0;">Cek Status Kelulusan</h2>
-            <p style="font-size: 14px; color: #e2e8f0; margin-bottom: 25px; position: relative; z-index: 2;">Masukkan Nomor Induk Siswa Nasional (NISN) Anda ke dalam kolom di bawah ini.</p>
+            <p style="font-size: 14px; color: #e2e8f0; margin-bottom: 25px;">Masukkan Nomor Induk Siswa Nasional (NISN) Anda.</p>
             <div class="input-group">
-                <input type="text" id="nisn-field" placeholder="Ketik NISN di sini..." maxlength="15" autocomplete="off">
+                <input type="text" id="nisn-field" placeholder="Ketik NISN Anda di sini..." maxlength="15" autocomplete="off">
             </div>
-            <button class="btn-check" onclick="prosesCek()">Cek Hasil Sekarang</button>
+            <button class="btn-check" onclick="prosesCek()">LIHAT HASIL</button>
         </div>
 
-        <div id="result-area">
+        <!-- Area Hasil Pengumuman -->
+        <div id="result-area" style="display: none;">
             <div class="result-frame">
-                <div style="font-size: 12px; color: #bfdbfe; text-transform: uppercase; font-weight: 600;">Nama Peserta Didik:</div>
-                <h2 id="res-nama" style="font-size: 24px; margin: 5px 0 0;">-</h2>
-                <div id="res-nisn" style="font-size: 13px; color: #e2e8f0; margin-bottom: 20px;">NISN: -</div>
+                <div style="font-size: 12px; color: #bfdbfe; font-weight: 600;">NAMA PESERTA DIDIK:</div>
+                <h2 id="res-nama" style="margin: 5px 0;">-</h2>
+                <div id="res-nisn" style="font-size: 13px; opacity: 0.8; margin-bottom: 15px;">NISN: -</div>
+                
                 <div style="width: 50px; height: 1px; background: rgba(255,255,255,0.3); margin: 0 auto 15px;"></div>
-                <div style="font-size: 12px; color: #bfdbfe; text-transform: uppercase; font-weight: 600;">Dinyatakan:</div>
+
+                <div style="font-size: 12px; color: #bfdbfe; font-weight: 600;">STATUS KELULUSAN:</div>
                 <div id="res-status" class="status-badge">-</div>
-                <div id="res-msg" style="font-size: 14px; line-height: 1.6; margin-top: 10px;"></div>
+                
+                <div id="res-msg" style="font-size: 15px; line-height: 1.6;"></div>
             </div>
-            <button class="btn-check btn-outline" onclick="location.reload()">Cek Siswa Lain</button>
+            <button class="btn-check btn-outline" onclick="location.reload()">CEK SISWA LAIN</button>
+        </div>
+
+        <!-- Area Pengunci Waktu -->
+        <div id="lock-message">
+            <i class="fas fa-lock" style="font-size: 40px; margin-bottom: 15px; opacity: 0.5;"></i>
+            <p>Akses pengecekan NISN belum dibuka.<br>Silakan tunggu waktu mundur di atas selesai.</p>
         </div>
     </div>
 
-    <div class="footer-credit">Design by MNF & VM 2026</div>
+    <div class="footer-credit" onclick="adminClick()">Design by MNF & VM 2026</div>
+
+    <!-- Admin Panel Hidden -->
+    <div id="admin-panel">
+        <h3>Setting Waktu Pengumuman</h3>
+        <p style="font-size: 12px; color: #666;">Gunakan format standar bahasa Inggris. <br>Misal: <strong>May 5, 2026 10:00:00</strong></p>
+        <input type="text" id="target-date-input" placeholder="May 5, 2026 10:00:00">
+        <button class="btn-check" onclick="saveSettings()">SIMPAN WAKTU</button>
+        <button class="btn-check btn-outline" onclick="closeAdmin()" style="color: black; border-color: #ccc;">BATAL</button>
+    </div>
 
     <script>
-        // =========================================================================
-        // DATA SISWA (PENGGANTI FILE CSV - DITANAM LANGSUNG DI KODE)
-        // Jika tahun depan ada siswa baru, Anda cukup mengganti data di bawah ini.
-        // =========================================================================
+        // ==========================================
+        // CONFIGURATION (SETTING WAKTU UTAMA)
+        // ==========================================
+        // Ganti tanggal di bawah ini sesuai jadwal resmi pengumuman Anda
+        // Format: 'Bulan Tanggal, Tahun Jam:Menit:Detik' (dalam Bahasa Inggris)
+        let defaultWaktu = "May 5, 2026 10:00:00"; 
+        
+        let savedWaktu = localStorage.getItem('targetDate') || defaultWaktu;
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const target = new Date(savedWaktu).getTime();
+            const gap = target - now;
+
+            if (gap <= 0) {
+                document.getElementById('countdown-container').style.display = 'none';
+                document.getElementById('lock-message').style.display = 'none';
+                document.getElementById('search-area').style.display = 'block';
+                return;
+            }
+
+            document.getElementById('countdown-container').style.display = 'block';
+            document.getElementById('lock-message').style.display = 'block';
+            document.getElementById('search-area').style.display = 'none';
+            
+            const second = 1000;
+            const minute = second * 60;
+            const hour = minute * 60;
+            const day = hour * 24;
+
+            document.getElementById('days').innerText = Math.floor(gap / day);
+            document.getElementById('hours').innerText = Math.floor((gap % day) / hour);
+            document.getElementById('mins').innerText = Math.floor((gap % hour) / minute);
+            document.getElementById('secs').innerText = Math.floor((gap % minute) / second);
+        }
+
+        setInterval(updateTimer, 1000);
+
+        // ==========================================
+        // DATA SISWA LENGKAP
+        // ==========================================
         const dataSiswa = [
           {"Nama": "ADOLF VALENTINO APITULEY TUTUPO", "NISN": "0086614300", "Keterangan": "Lulus"},
           {"Nama": "ALVANA AMELIA FANATAF", "NISN": "0088007487", "Keterangan": "Lulus"},
@@ -380,44 +477,65 @@
           {"Nama": "VALLERIA CHYNTIA BELLE HUBI", "NISN": "0072522854", "Keterangan": "Lulus"},
           {"Nama": "YERI WAHLA", "NISN": "3082398254", "Keterangan": "Lulus"},
           {"Nama": "YOHANES WAKEI", "NISN": "0074521295", "Keterangan": "Lulus"},
-          {"Nama": "YOSEFINE EULALIA SIRKEN", "NISN": "3088118294", "Keterangan": "Lulus"},
-          {"Nama": "YOSINA FOUH HOLOMBAUW", "NISN": "0081290476", "Keterangan": "Lulus"},
-          {"Nama": "ZOE JESYCA TUMEWU", "NISN": "0078187003", "Keterangan": "Lulus"}
+          {"Nama": "YOSEFINE EULALIA SIRKEN", "NISN": "3088118294", "Keterangan": "Lulus"}
         ];
 
         function prosesCek() {
             const input = document.getElementById('nisn-field').value.trim();
-            if(!input) return alert("Masukkan Nomor Induk Siswa Nasional (NISN) Anda!");
+            if(!input) return alert("Silakan masukkan NISN Anda terlebih dahulu.");
 
-            // Mencari siswa berdasarkan NISN
             const siswa = dataSiswa.find(s => s.NISN === input);
             
             if(!siswa) {
-                return alert("Data dengan NISN " + input + " tidak ditemukan. Pastikan nomor Anda sudah benar.");
+                return alert("Data dengan NISN " + input + " tidak ditemukan.");
             }
 
-            // Menyembunyikan form pencarian dan menampilkan hasil
             document.getElementById('search-area').style.display = 'none';
             document.getElementById('result-area').style.display = 'block';
 
-            const nama = siswa.Nama;
             const status = siswa.Keterangan.toUpperCase();
-
-            document.getElementById('res-nama').innerText = nama;
-            document.getElementById('res-nisn').innerText = "NISN: " + input;
-            
             const badge = document.getElementById('res-status');
+            const msgArea = document.getElementById('res-msg');
+
+            document.getElementById('res-nama').innerText = siswa.Nama;
+            document.getElementById('res-nisn').innerText = "NISN: " + input;
             badge.innerText = status;
 
-            // Menentukan warna dan pesan berdasarkan status Lulus/Tidak Lulus
+            // Logika Mata Berbintang dan Pesan
             if(status.includes("LULUS") && !status.includes("TIDAK")) {
                 badge.className = "status-badge status-lulus";
-                document.getElementById('res-msg').innerHTML = "Selamat atas kelulusan, <strong>" + nama + "</strong>! Kerja keras Anda membuahkan hasil. Teruslah terbang tinggi mengejar cita-cita.";
-                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } }); // Efek konfeti
+                msgArea.innerHTML = `<span class="emot-lulus">🤩</span>Selamat <strong>${siswa.Nama}</strong>, Anda dinyatakan LULUS! Teruslah bersinar dan kejar cita-citamu!`;
+                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
             } else {
                 badge.className = "status-badge status-gagal";
-                document.getElementById('res-msg').innerHTML = "Mohon maaf, <strong>" + nama + "</strong>. Jangan berkecil hati. Kegagalan adalah awal dari perjalanan baru yang lebih kuat. Tetap semangat!";
+                msgArea.innerHTML = `<br>Tetap semangat <strong>${siswa.Nama}</strong>. Ini bukanlah akhir dari segalanya. Teruslah berjuang!`;
             }
+        }
+
+        // ==========================================
+        // FITUR ADMIN (HIDDEN)
+        // ==========================================
+        let clickCount = 0;
+        function adminClick() {
+            clickCount++;
+            if(clickCount >= 5) {
+                document.getElementById('admin-panel').style.display = 'block';
+                document.getElementById('target-date-input').value = savedWaktu;
+                clickCount = 0;
+            }
+        }
+
+        function closeAdmin() {
+            document.getElementById('admin-panel').style.display = 'none';
+        }
+
+        function saveSettings() {
+            const val = document.getElementById('target-date-input').value;
+            if(isNaN(Date.parse(val))) return alert("Format tanggal salah! Gunakan format bulan bahasa Inggris. Contoh: May 5, 2026 10:00:00");
+            
+            localStorage.setItem('targetDate', val);
+            alert("Waktu berhasil disimpan! Halaman akan direfresh.");
+            location.reload();
         }
     </script>
 </body>
