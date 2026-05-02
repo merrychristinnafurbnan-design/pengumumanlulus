@@ -32,63 +32,54 @@
             flex-direction: column; 
             align-items: center; 
             justify-content: center; 
-            background-image: radial-gradient(#e2e8f0 1px, transparent 1px); 
-            background-size: 20px 20px; 
             padding: 20px;
-            box-sizing: border-box; 
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
         }
+
+        /* Latar Belakang Interaktif */
+        .bg-bubbles {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; margin: 0; padding: 0;
+        }
+        .bg-bubbles li {
+            position: absolute; list-style: none; display: block; width: 40px; height: 40px;
+            background-color: rgba(37, 99, 235, 0.05); bottom: -160px;
+            animation: square 25s infinite; transition-timing-function: linear; border-radius: 50%;
+        }
+        .bg-bubbles li:nth-child(1) { left: 10%; }
+        .bg-bubbles li:nth-child(2) { left: 20%; width: 80px; height: 80px; animation-delay: 2s; animation-duration: 17s; }
+        .bg-bubbles li:nth-child(3) { left: 25%; animation-delay: 4s; }
+        .bg-bubbles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-duration: 22s; background-color: rgba(251, 191, 36, 0.05); }
+        .bg-bubbles li:nth-child(5) { left: 70%; }
+        .bg-bubbles li:nth-child(6) { left: 80%; width: 120px; height: 120px; animation-delay: 3s; background-color: rgba(37, 99, 235, 0.05); }
+        .bg-bubbles li:nth-child(7) { left: 32%; width: 160px; height: 160px; animation-delay: 7s; }
+        .bg-bubbles li:nth-child(8) { left: 55%; width: 20px; height: 20px; animation-delay: 15s; animation-duration: 40s; }
+        .bg-bubbles li:nth-child(9) { left: 25%; width: 10px; height: 10px; animation-delay: 2s; animation-duration: 40s; background-color: rgba(251, 191, 36, 0.05);}
+        .bg-bubbles li:nth-child(10) { left: 90%; width: 160px; height: 160px; animation-delay: 11s; }
+
+        @keyframes square { 0% { transform: translateY(0); } 100% { transform: translateY(-1000px) rotate(600deg); } }
         
         h1, h2 { font-family: var(--font-heading); }
         
         .header-section { text-align: center; margin-bottom: 20px; animation: fadeInDown 0.8s ease-out; }
-        #display-logo { margin-bottom: 15px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); border-radius: 10px; width: 100px; }
+        #display-logo { margin-bottom: 15px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); border-radius: 10px; width: 100px; transition: transform 0.3s;}
+        #display-logo:hover { transform: scale(1.05) rotate(2deg); }
         #display-school-name { font-size: clamp(24px, 5vw, 32px); color: var(--box-blue-dark); margin: 0; font-weight: 700; }
         .sub-header { font-size: 14px; color: #64748b; font-weight: 500; }
 
-        /* Countdown Style */
-        #countdown-container {
-            display: none;
-            margin-bottom: 20px;
-            background: var(--white);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            text-align: center;
-        }
+        #countdown-container { display: none; margin-bottom: 20px; background: var(--white); padding: 20px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; }
         .timer-grid { display: flex; gap: 15px; justify-content: center; margin-top: 10px; }
-        .timer-box { background: var(--box-blue-dark); color: white; padding: 10px; border-radius: 8px; min-width: 60px; }
+        .timer-box { background: var(--box-blue-dark); color: white; padding: 10px; border-radius: 8px; min-width: 60px; transition: transform 0.2s;}
         .timer-box span { display: block; font-size: 24px; font-weight: 700; }
         .timer-box label { font-size: 10px; text-transform: uppercase; opacity: 0.8; }
 
         .card { 
             background: linear-gradient(135deg, var(--box-blue-dark) 0%, var(--box-blue-light) 100%); 
-            color: var(--white); 
-            padding: 40px 30px; 
-            border-radius: 20px; 
-            width: 100%; 
-            max-width: 450px; 
-            text-align: center; 
-            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2); 
-            animation: scaleIn 0.6s ease-out; 
-            position: relative; 
-            overflow: hidden; 
+            color: var(--white); padding: 40px 30px; border-radius: 20px; width: 100%; max-width: 450px; 
+            text-align: center; box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2); animation: scaleIn 0.6s ease-out; 
+            position: relative; overflow: hidden; 
         }
-
-        /* Admin Panel */
-        #admin-panel {
-            display: none;
-            position: fixed;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 0 100px rgba(0,0,0,0.5);
-            z-index: 999;
-            width: 90%; max-width: 400px;
-        }
-        #admin-panel h3 { margin-top: 0; color: var(--box-blue-dark); }
-        #admin-panel input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
 
         .input-group { margin-bottom: 20px; position: relative; z-index: 2; }
         input[type="text"] { 
@@ -96,37 +87,57 @@
             border-radius: 12px; font-size: 16px; text-align: center; transition: 0.3s; 
             background: rgba(255, 255, 255, 0.95); color: var(--text-dark); box-sizing: border-box; 
         }
-        input[type="text"]:focus { border-color: var(--accent-gold); outline: none; background: #ffffff; box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.3); }
+        input[type="text"]:focus { border-color: var(--accent-gold); outline: none; background: #ffffff; box-shadow: 0 0 15px rgba(251, 191, 36, 0.4); transform: translateY(-2px);}
 
         .btn-check { 
             background: var(--accent-gold); color: var(--box-blue-dark); width: 100%; 
             padding: 16px; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; 
-            cursor: pointer; transition: 0.3s; position: relative; z-index: 2; font-family: var(--font-body);
+            cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; z-index: 2; font-family: var(--font-body);
         }
-        .btn-check:hover { background: #f59e0b; transform: translateY(-2px); }
+        .btn-check:hover { background: #f59e0b; transform: translateY(-3px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
+        .btn-check:active { transform: translateY(0); }
         .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255, 255, 255, 0.4); margin-top: 15px; }
+        .btn-outline:hover { background: rgba(255, 255, 255, 0.1); color: var(--white); }
 
-        .result-frame { background: rgba(255, 255, 255, 0.1); border: 1px dashed rgba(255, 255, 255, 0.4); border-radius: 16px; padding: 30px 20px; margin-top: 20px; position: relative; z-index: 2; }
-        .status-badge { display: inline-block; margin: 15px 0; padding: 8px 30px; font-size: 22px; font-weight: 700; color: white; border-radius: 50px; }
-        .status-lulus { background: var(--success); box-shadow: 0 8px 15px rgba(16, 185, 129, 0.4); animation: pulse 1.5s infinite; }
+        .result-frame { background: rgba(255, 255, 255, 0.1); border: 1px dashed rgba(255, 255, 255, 0.4); border-radius: 16px; padding: 30px 20px; margin-top: 20px; animation: scaleIn 0.5s ease-out; }
+        
+        .status-badge { display: inline-block; margin: 15px 0; padding: 8px 30px; font-size: 22px; font-weight: 700; color: white; border-radius: 50px; transition: transform 0.2s;}
+        .status-lulus { background: var(--success); box-shadow: 0 8px 15px rgba(16, 185, 129, 0.4); animation: pulse 1.5s infinite; cursor: pointer; }
+        .status-lulus:active { transform: scale(0.95); }
         .status-gagal { background: var(--danger); box-shadow: 0 8px 15px rgba(239, 68, 68, 0.4); }
 
-        .emot-lulus { font-size: 40px; display: block; margin-bottom: 10px; }
+        .emot-lulus { font-size: 40px; display: block; margin-bottom: 10px; animation: bounce 2s infinite; }
 
-        .footer-credit { margin-top: 30px; font-size: 12px; color: #94a3b8; cursor: pointer; user-select: none; font-weight: 600;}
+        /* Loading Animation Style */
+        #loading-area { display: none; padding: 30px 0; animation: fadeInDown 0.3s; }
+        .loader {
+            width: 48px; height: 48px; border: 5px solid rgba(255,255,255,0.3); border-radius: 50%;
+            border-top-color: var(--accent-gold); animation: spin 1s ease-in-out infinite; margin: 0 auto 15px;
+        }
 
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        .footer-credit { margin-top: 30px; font-size: 12px; color: #94a3b8; user-select: none; font-weight: 600;}
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); } 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); } }
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-        #search-area, #result-area { position: relative; z-index: 5; }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-15px);} 60% {transform: translateY(-7px);} }
+        
+        #search-area, #result-area, #lock-message { position: relative; z-index: 5; }
     </style>
 </head>
 <body>
 
+    <!-- Latar belakang interaktif -->
+    <ul class="bg-bubbles">
+        <li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li>
+    </ul>
+
     <div class="header-section">
         <img id="display-logo" src="logo.jpg" alt="Logo">
         <h1 id="display-school-name">SMAS YPPK TERUNA BAKTI</h1>
-        <div class="sub-header">Pengumuman Kelulusan Peserta Didik Kelas XII T.A 2025/2026</div>
+        <div class="sub-header">Pengumuman Kelulusan Peserta Didik T.A 2025/2026</div>
     </div>
 
     <!-- Countdown Section -->
@@ -148,7 +159,14 @@
             <div class="input-group">
                 <input type="text" id="nisn-field" placeholder="Ketik NISN Anda di sini..." maxlength="15" autocomplete="off">
             </div>
-            <button class="btn-check" onclick="prosesCek()">LIHAT HASIL</button>
+            <button class="btn-check" onclick="prosesCek()"><i class="fas fa-search"></i> LIHAT HASIL</button>
+        </div>
+
+        <!-- Area Loading / Ketegangan -->
+        <div id="loading-area">
+            <div class="loader"></div>
+            <h3 style="margin:0; font-family: var(--font-body);">Mencari Data...</h3>
+            <p style="font-size: 13px; color: #bfdbfe; margin-top:5px;">Harap tunggu sebentar</p>
         </div>
 
         <!-- Area Hasil Pengumuman -->
@@ -161,11 +179,13 @@
                 <div style="width: 50px; height: 1px; background: rgba(255,255,255,0.3); margin: 0 auto 15px;"></div>
 
                 <div style="font-size: 12px; color: #bfdbfe; font-weight: 600;">STATUS KELULUSAN:</div>
-                <div id="res-status" class="status-badge">-</div>
+                <!-- Menambahkan fungsi klik pada badge untuk memunculkan confetti lagi -->
+                <div id="res-status" class="status-badge" onclick="ekstraConfetti()" title="Klik saya!">-</div>
                 
                 <div id="res-msg" style="font-size: 15px; line-height: 1.6;"></div>
             </div>
-            <button class="btn-check btn-outline" onclick="location.reload()">CEK SISWA LAIN</button>
+            <!-- Diganti agar reset mulus tanpa perlu reload web -->
+            <button class="btn-check btn-outline" onclick="resetTampilan()"><i class="fas fa-undo"></i> CEK SISWA LAIN</button>
         </div>
 
         <!-- Area Pengunci Waktu -->
@@ -175,42 +195,34 @@
         </div>
     </div>
 
-    <div class="footer-credit" onclick="adminClick()">Design by MNF & VM 2026</div>
-
-    <!-- Admin Panel Hidden -->
-    <div id="admin-panel">
-        <h3>Setting Waktu Pengumuman</h3>
-        <p style="font-size: 12px; color: #666;">Gunakan format standar bahasa Inggris. <br>Misal: <strong>May 5, 2026 10:00:00</strong></p>
-        <input type="text" id="target-date-input" placeholder="May 2, 2026 10:00:00">
-        <button class="btn-check" onclick="saveSettings()">SIMPAN WAKTU</button>
-        <button class="btn-check btn-outline" onclick="closeAdmin()" style="color: black; border-color: #ccc;">BATAL</button>
-    </div>
+    <div class="footer-credit">Design by MNF & VM 2026</div>
 
     <script>
         // ==========================================
         // CONFIGURATION (SETTING WAKTU UTAMA)
         // ==========================================
-        // Ganti tanggal di bawah ini sesuai jadwal resmi pengumuman Anda
-        // Format: 'Bulan Tanggal, Tahun Jam:Menit:Detik' (dalam Bahasa Inggris)
-        let defaultWaktu = "May 2, 2026 10:00:00"; 
+        let defaultWaktu = "May 5, 2026 10:00:00"; 
         
-        let savedWaktu = localStorage.getItem('targetDate') || defaultWaktu;
-
         function updateTimer() {
             const now = new Date().getTime();
-            const target = new Date(savedWaktu).getTime();
+            const target = new Date(defaultWaktu).getTime();
             const gap = target - now;
 
             if (gap <= 0) {
                 document.getElementById('countdown-container').style.display = 'none';
                 document.getElementById('lock-message').style.display = 'none';
-                document.getElementById('search-area').style.display = 'block';
+                // Hanya tampilkan form jika sedang tidak loading atau melihat hasil
+                if(document.getElementById('result-area').style.display === 'none' && document.getElementById('loading-area').style.display === 'none') {
+                    document.getElementById('search-area').style.display = 'block';
+                }
                 return;
             }
 
             document.getElementById('countdown-container').style.display = 'block';
             document.getElementById('lock-message').style.display = 'block';
             document.getElementById('search-area').style.display = 'none';
+            document.getElementById('result-area').style.display = 'none';
+            document.getElementById('loading-area').style.display = 'none';
             
             const second = 1000;
             const minute = second * 60;
@@ -225,8 +237,16 @@
 
         setInterval(updateTimer, 1000);
 
+        // Menambahkan fungsi agar bisa tekan "Enter" di keyboard untuk mencari
+        document.getElementById('nisn-field').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                prosesCek();
+            }
+        });
+
         // ==========================================
-        // DATA SISWA LENGKAP
+        // DATA SISWA
         // ==========================================
         const dataSiswa = [
           {"Nama": "ADOLF VALENTINO APITULEY TUTUPO", "NISN": "0086614300", "Keterangan": "Lulus"},
@@ -479,8 +499,7 @@
           {"Nama": "YOHANES WAKEI", "NISN": "0074521295", "Keterangan": "Lulus"},
           {"Nama": "YOSEFINE EULALIA SIRKEN", "NISN": "3088118294", "Keterangan": "Lulus"},
           {"Nama": "YOSINA FOUH HOLOMBAUW", "NISN": "0081290476", "Keterangan": "Lulus"},
-          {"Nama": "ZOE  JESYCA TUMEWU", "NISN": "0078187003", "Keterangan": "Lulus"}
-            
+          {"Nama": "ZOE JESYCA TUMEWU", "NISN": "0078187003", "Keterangan": "Lulus"}
         ];
 
         function prosesCek() {
@@ -493,52 +512,54 @@
                 return alert("Data dengan NISN " + input + " tidak ditemukan.");
             }
 
+            // Sembunyikan form pencarian dan tampilkan loading
             document.getElementById('search-area').style.display = 'none';
-            document.getElementById('result-area').style.display = 'block';
+            document.getElementById('loading-area').style.display = 'block';
 
-            const status = siswa.Keterangan.toUpperCase();
-            const badge = document.getElementById('res-status');
-            const msgArea = document.getElementById('res-msg');
+            // Memberikan jeda waktu (suspense) selama 1.5 detik
+            setTimeout(() => {
+                document.getElementById('loading-area').style.display = 'none';
+                document.getElementById('result-area').style.display = 'block';
 
-            document.getElementById('res-nama').innerText = siswa.Nama;
-            document.getElementById('res-nisn').innerText = "NISN: " + input;
-            badge.innerText = status;
+                const status = siswa.Keterangan.toUpperCase();
+                const badge = document.getElementById('res-status');
+                const msgArea = document.getElementById('res-msg');
 
-            // Logika Mata Berbintang dan Pesan
-            if(status.includes("LULUS") && !status.includes("TIDAK")) {
-                badge.className = "status-badge status-lulus";
-                msgArea.innerHTML = `<span class="emot-lulus">🤩</span>Selamat <strong>${siswa.Nama}</strong>, Anda dinyatakan LULUS! Teruslah bersinar dan kejar cita-citamu!`;
-                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-            } else {
-                badge.className = "status-badge status-gagal";
-                msgArea.innerHTML = `<br>Tetap semangat <strong>${siswa.Nama}</strong>. Ini bukanlah akhir dari segalanya. Teruslah berjuang!`;
+                document.getElementById('res-nama').innerText = siswa.Nama;
+                document.getElementById('res-nisn').innerText = "NISN: " + input;
+                badge.innerText = status;
+
+                // Logika Tampilan Hasil
+                if(status.includes("LULUS") && !status.includes("TIDAK")) {
+                    badge.className = "status-badge status-lulus";
+                    msgArea.innerHTML = `<span class="emot-lulus">🤩</span>Selamat <strong>${siswa.Nama}</strong>, Anda dinyatakan LULUS! Teruslah bersinar dan kejar cita-citamu!`;
+                    lemparConfetti();
+                } else {
+                    badge.className = "status-badge status-gagal";
+                    msgArea.innerHTML = `<br>Tetap semangat <strong>${siswa.Nama}</strong>. Ini bukanlah akhir dari segalanya. Teruslah berjuang!`;
+                }
+            }, 1500); // 1500 ms = 1.5 detik
+        }
+
+        // Fungsi melempar confetti
+        function lemparConfetti() {
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+        }
+
+        // Fungsi interaktif ketika klik badge kelulusan
+        function ekstraConfetti() {
+            const badgeText = document.getElementById('res-status').innerText;
+            if(badgeText.includes("LULUS")) {
+                confetti({ particleCount: 50, spread: 100, origin: { y: 0.5 } });
             }
         }
 
-        // ==========================================
-        // FITUR ADMIN (HIDDEN)
-        // ==========================================
-        let clickCount = 0;
-        function adminClick() {
-            clickCount++;
-            if(clickCount >= 5) {
-                document.getElementById('admin-panel').style.display = 'block';
-                document.getElementById('target-date-input').value = savedWaktu;
-                clickCount = 0;
-            }
-        }
-
-        function closeAdmin() {
-            document.getElementById('admin-panel').style.display = 'none';
-        }
-
-        function saveSettings() {
-            const val = document.getElementById('target-date-input').value;
-            if(isNaN(Date.parse(val))) return alert("Format tanggal salah! Gunakan format bulan bahasa Inggris. Contoh: May 5, 2026 10:00:00");
-            
-            localStorage.setItem('targetDate', val);
-            alert("Waktu berhasil disimpan! Halaman akan direfresh.");
-            location.reload();
+        // Fungsi reset halus tanpa me-reload halaman
+        function resetTampilan() {
+            document.getElementById('result-area').style.display = 'none';
+            document.getElementById('search-area').style.display = 'block';
+            document.getElementById('nisn-field').value = ''; // Kosongkan input
+            document.getElementById('nisn-field').focus(); // Arahkan kursor ke input
         }
     </script>
 </body>
